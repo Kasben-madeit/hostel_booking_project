@@ -25,4 +25,3 @@ class BookingAdmin(admin.ModelAdmin):
     search_fields = ('user__username', 'room__room_number')
 
 
-    snkldsk
