@@ -17,10 +17,14 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key secret in production!
-SECRET_KEY = 'replace-this-with-a-secure-secret-key'
+import os
+
+SECRET_KEY = os.getenv("SECRET_KEY", "unsafe-dev-key")
+DEBUG = os.getenv("DEBUG", "False") == "True"
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS: list[str] = []
 
@@ -115,7 +119,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
